@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Switch, useLocation } from "react-router-dom";
+import Home from "./Components/Home";
+
+// style
+
+import GlobalStyle from "./theme/GlobalStyle";
+import Countdown from "./Components/Countdown";
+import Start from "./Components/Start";
 
 function App() {
+  const location = useLocation();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch location={location} key={location.key}>
+        <Route path="/conte">
+          <Start />
+        </Route>
+        <Route path="/horloge">
+          <Countdown />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+      <GlobalStyle />
+    </>
   );
 }
 
