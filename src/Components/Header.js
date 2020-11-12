@@ -31,6 +31,8 @@ export default styled(Header)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 25px;
+    margin-left: 25px;
   }
   .titre {
     font-size: ${pxToRem(28)};

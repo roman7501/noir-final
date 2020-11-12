@@ -9,7 +9,20 @@ const Buttons = ({ className }) => {
   return (
     <div className={className}>
       <div>
-        {isClicked && <p>06 33 71 01 38</p>}
+        {isClicked && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: {
+                duration: 1.5,
+                delay: 0.5,
+              },
+            }}
+          >
+            06 33 71 01 38
+          </motion.p>
+        )}
         {!isClicked && (
           <motion.button
             className="btn"
@@ -27,7 +40,7 @@ const Buttons = ({ className }) => {
       </div>
       <div>
         <a
-          href="https://vigilant-edison-e4b0c5.netlify.app/"
+          href="https://lefoyerdescontes.com/"
           target="_blank"
           rel="noreferrer"
         >

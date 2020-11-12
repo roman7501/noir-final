@@ -12,6 +12,7 @@ import Buttons from "./Buttons";
 const Start = ({ className }) => {
   const [letsPlay, setLetsPlay] = useState(false);
   const [indications, setIndications] = useState(true);
+  const [itsTooLate, setItsTooLate] = useState(null);
   const [audioTime, setAudioTime] = useState(0);
 
   // Display indications
@@ -24,18 +25,31 @@ const Start = ({ className }) => {
     setTimeout(() => setIndications(false), start);
   }, [letsPlay, indications]);
 
+  useEffect(() => {
+    const dateNow = new Date();
+    const hours = dateNow.getHours();
+    // Desactiver la page en dehors de 20h
+    if (hours === 20) {
+      setItsTooLate(false);
+    } else {
+      // change this line to true <-----------------------
+      setItsTooLate(true);
+    }
+  }, [itsTooLate]);
+
   // Subtitles
   const subtitles = dataSubtitles.subtitles;
 
   const textFinal = Object.keys(subtitles).map((el) => {
-    if (audioTime >= 1120) {
+    if (audioTime >= 1078) {
+      localStorage.removeItem("audioTime");
       return (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
             transition: {
-              duration: 20,
+              duration: 40,
               delay: 0,
             },
           }}
@@ -43,15 +57,16 @@ const Start = ({ className }) => {
           <p>
             Le spectacle en est là aujourd’hui <br /> Nous ne savons pas encore
             quand ni dans quelles conditions nous pourrons le terminer <br />
-            Merci de l’avoir écouté <br /> Il est rare d’avoir l’occasion de
-            présenter une pièce dans cet état-là d’entre-deux, inachevée et
-            ouverte. <br />
+            <br />
+            Merci de l’avoir écouté <br /> <br />
+            Il est rare d’avoir l’occasion de présenter une pièce dans cet
+            état-là d’entre-deux, inachevée et ouverte. <br />
             Nous avons voulu en profiter pour proposer à chacun.e d’inventer sa
             propre fin, <br /> et conserver le souvenir de ces passages -
-            permettre à tous.tes d’entendre ces traces <br /> Pour celleux qui
-            le souhaitent, nous mettons à disposition un numéro de téléphone où
-            vous pourrez laisser un message, raconter la fin de l’histoire que
-            vous venez d’entendre <br />
+            permettre à tous.tes d’entendre ces traces <br />
+            <br /> Pour celleux qui le souhaitent, nous mettons à disposition un
+            numéro de téléphone où vous pourrez laisser un message, raconter la
+            fin de l’histoire que vous venez d’entendre <br />
             <br /> Ces dénouements alternatifs resteront audibles sur le site,
             au terme de chaque écoute
           </p>
@@ -92,35 +107,39 @@ const Start = ({ className }) => {
   };
 
   return (
-    <motion.div
-      className={className}
-      // animate="animationOne"
-      // variants={variants}
-    >
-      <AnimatePresence>
-        {indications && <Indications className="indications" />}
-      </AnimatePresence>
-      {letsPlay && (
-        <div className="play">
-          <audio
-            autoPlay
-            onTimeUpdate={(e) => setAudioTime(e.target.currentTime)}
-            src="https://firebasestorage.googleapis.com/v0/b/dans-le-noir-62252.appspot.com/o/LDO-AUDIO-V8.mp3?alt=media&token=1967b362-a415-4f59-91ef-d80427d500d7"
-          ></audio>
-          <div
-            className="titre"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={variants}
-          >
-            <AnimatePresence>{titre}</AnimatePresence>
-          </div>
+    <div className={className}>
+      {!itsTooLate && (
+        <motion.div
+        // animate="animationOne"
+        // variants={variants}
+        >
+          <AnimatePresence>
+            {indications && <Indications className="indications" />}
+          </AnimatePresence>
+          {letsPlay && (
+            <div className="play">
+              <audio
+                autoPlay
+                onTimeUpdate={(e) => setAudioTime(e.target.currentTime)}
+                src="https://firebasestorage.googleapis.com/v0/b/dans-le-noir-62252.appspot.com/o/LDO-Audio-V12.mp3?alt=media&token=264967ef-6f25-4e4a-9d40-37d448150e63"
+              ></audio>
+              <div
+                className="titre"
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                variants={variants}
+              >
+                <AnimatePresence>{titre}</AnimatePresence>
+              </div>
 
-          <div className="text-final">{textFinal}</div>
-        </div>
+              <div className="text-final">{textFinal}</div>
+            </div>
+          )}
+        </motion.div>
       )}
-    </motion.div>
+      {itsTooLate && <p className="too-late">Ce n'est pas encore l'heure</p>}
+    </div>
   );
 };
 
@@ -138,10 +157,16 @@ export default styled(Start)`
     font-family: ${fonts.body};
     font-size: ${pxToRem(18)};
     letter-spacing: ${fonts.space};
-    line-height: ${fonts.line};
+    line-height: 2;
   }
   .buttons {
     margin-top: 60px;
     margin-bottom: 50px;
+  }
+  .too-late {
+    font-family: ${fonts.body};
+    font-size: ${pxToRem(18)};
+    letter-spacing: ${fonts.space};
+    margin: 100px;
   }
 `;

@@ -11,13 +11,13 @@ const Titre = ({ text, className, sousText, sousTitre }) => {
     visible: {
       opacity: 0.5,
       transition: {
-        duration: 25,
+        duration: 42,
       },
     },
     exit: {
       opacity: 0,
       transition: {
-        duration: 10,
+        duration: 17,
       },
     },
   };
@@ -37,7 +37,7 @@ const Titre = ({ text, className, sousText, sousTitre }) => {
           opacity: 0.5,
           transition: {
             duration: 25,
-            delay: 3,
+            delay: 25,
           },
         }}
       >
@@ -50,7 +50,7 @@ const Titre = ({ text, className, sousText, sousTitre }) => {
           opacity: 0.5,
           transition: {
             duration: 25,
-            delay: 8,
+            delay: 35,
           },
         }}
       >
@@ -70,6 +70,7 @@ export default styled(Titre)`
   top: 14vh;
   opacity: 0.4;
   font-family: freight-big-pro, serif;
+  white-space: normal;
   .titre {
     font-size: ${pxToRem(154)};
     text-transform: uppercase;
@@ -88,7 +89,7 @@ export default styled(Titre)`
   }
   @media (max-width: 930px) {
     .titre {
-      font-size: ${pxToRem(65)};
+      font-size: ${pxToRem(52)};
     }
     .sous-text {
       font-size: ${pxToRem(45)};

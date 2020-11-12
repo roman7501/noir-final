@@ -29,12 +29,10 @@ const Countdown = ({ className }) => {
     const delay = 85800;
 
     if (allSeconds > delay) {
-      console.log(allSeconds);
       setItsTime(true);
       clearInterval(timer);
     }
     if (allSeconds < delay) {
-      console.log(allSeconds);
       if (seconds < 10) {
         seconds = "0" + seconds;
       }
@@ -82,6 +80,9 @@ const Countdown = ({ className }) => {
             <p>prochaine écoute dans</p>
             <p className="counter">{counter}</p>
           </div>
+          {/* <Link to="/conte" style={{ marginLeft: "100px" }}>
+            <Button className="btn" text="commencer en avant première" />
+          </Link> */}
         </>
       )}
       {itsTime && (
@@ -111,11 +112,8 @@ export default styled(Countdown)`
     flex-direction: column;
     letter-spacing: 0.1rem;
   }
-  .round {
-    width: 30px;
-    height: 30px;
-    border: none;
-    background: white;
-    border-radius: 50%;
+
+  @media (max-width: 600px) {
+    font-size: ${pxToRem(16)};
   }
 `;

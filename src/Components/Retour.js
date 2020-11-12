@@ -14,4 +14,7 @@ export default styled(Retour)`
   background: transparent;
   color: white;
   outline: none;
+  @media (max-width: 600px) {
+    font-size: ${pxToRem(16)};
+  }
 `;
