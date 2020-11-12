@@ -26,7 +26,7 @@ const Countdown = ({ className }) => {
 
     const allSeconds = heures * 60 * 60 + minutes * 60 + seconds;
     // délai=10minutes = 85800
-    const delay = 75800;
+    const delay = 85800;
 
     if (allSeconds > delay) {
       setItsTime(true);
