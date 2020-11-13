@@ -82,4 +82,10 @@ export default styled(Buttons)`
     flex-direction: column;
     align-items: center;
   }
+  .btn {
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 20px;
+  }
 `;
