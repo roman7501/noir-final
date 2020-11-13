@@ -62,7 +62,8 @@ const Home = ({ className }) => {
         <br />
         développement web : Clément Bossut et Roman Jean-Elie <br />
         <br />
-        Production : Prémisses - Office de production artistique et solidaire{" "}
+        Production : Prémisses - Office de production artistique et solidaire
+        <br /> avec la participation artistique du Jeune Théâtre National
         <br /> <br />
         Coproductions : Théâtre de Rungis, Théâtre La Passerelle - Scène
         Nationale de Gap - autres en cours Résidences : Théâtre de Rungis,
